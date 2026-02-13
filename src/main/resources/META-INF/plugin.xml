@@ -1,0 +1,40 @@
+<idea-plugin>
+    <id>com.github.jameslewis.easyworktrees</id>
+    <name>Easy Worktrees</name>
+    <vendor url="https://github.com/JamesBLewis/easy-worktrees">James Lewis</vendor>
+
+    <description><![CDATA[
+    Manage Git worktrees from within IntelliJ IDEA.
+    Provides a dedicated tool window to list, search, and switch between
+    Git worktrees. Includes a one-click action to jump to the worktree
+    that has master/main checked out.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <changesViewContent
+                tabName="Worktrees"
+                className="com.github.jameslewis.easyworktrees.ui.WorktreeContentProvider"/>
+
+        <notificationGroup id="Easy Worktrees"
+                           displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="EasyWorktrees.SwitchToMain"
+                class="com.github.jameslewis.easyworktrees.actions.SwitchToMainAction"
+                text="Switch to Main Worktree"
+                description="Open the worktree that has master/main/trunk checked out"
+                icon="AllIcons.Vcs.Branch">
+            <add-to-group group-id="VcsGroups" anchor="last"/>
+        </action>
+
+        <action id="EasyWorktrees.Refresh"
+                class="com.github.jameslewis.easyworktrees.actions.RefreshWorktreesAction"
+                text="Refresh Worktrees"
+                description="Refresh the worktree list"
+                icon="AllIcons.Actions.Refresh"/>
+    </actions>
+</idea-plugin>
