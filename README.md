@@ -61,10 +61,6 @@ JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home" ./gra
 - Requires Git plugin (bundled with IntelliJ)
 - Git 2.15+ (for `git worktree` support)
 
-## Contributing
-
-https://github.com/JamesBLewis/easy-worktrees
-
 ## License
 
 MIT
