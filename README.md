@@ -1,4 +1,11 @@
+<p align="center">
+  <img src="icon.png" width="120" alt="Easy Worktrees">
+</p>
+
 # Easy Worktrees
+
+[![JetBrains Marketplace](https://img.shields.io/jetbrains/plugin/v/30206-easy-worktrees.svg?label=JetBrains%20Marketplace)](https://plugins.jetbrains.com/plugin/30206-easy-worktrees)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/30206-easy-worktrees.svg)](https://plugins.jetbrains.com/plugin/30206-easy-worktrees)
 
 An IntelliJ IDEA plugin for managing Git worktrees. Adds a **Worktrees** tab directly inside the existing Git tool window — no extra sidebar icons, no clutter.
 
@@ -15,11 +22,17 @@ Built for developers who use `git worktree` heavily (especially with tools like 
 
 ## Installation
 
+### From JetBrains Marketplace
+
+1. In IntelliJ: **Settings > Plugins > Marketplace**
+2. Search for **Easy Worktrees**
+3. Click **Install** and restart IDE
+
 ### From disk
 
-1. Build the plugin (see below) or grab a release zip
+1. Build the plugin (see below) or grab a zip from [GitHub Releases](https://github.com/JamesBLewis/easy-worktrees/releases)
 2. In IntelliJ: **Settings > Plugins > Gear icon > Install Plugin from Disk**
-3. Select `build/distributions/easy-worktrees-0.1.0.zip`
+3. Select the zip file
 4. Restart IDE
 
 ## Usage
@@ -47,7 +60,7 @@ Then build:
 JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home" ./gradlew buildPlugin
 ```
 
-The plugin zip will be at `build/distributions/easy-worktrees-0.1.0.zip`.
+The plugin zip will be at `build/distributions/easy-worktrees-1.0.0.zip`.
 
 ### Run a sandboxed IDE for testing
 

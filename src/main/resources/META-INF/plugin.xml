@@ -4,10 +4,22 @@
     <vendor url="https://github.com/JamesBLewis/easy-worktrees">James Lewis</vendor>
 
     <description><![CDATA[
-    Manage Git worktrees from within IntelliJ IDEA.
-    Provides a dedicated tool window to list, search, and switch between
-    Git worktrees. Includes a one-click action to jump to the worktree
-    that has master/main checked out.
+    <p>Manage Git worktrees directly from the Git tool window. No extra sidebar icons, no clutter — just a <b>Worktrees</b> tab alongside Log and Console.</p>
+
+    <p>Built for developers who use <code>git worktree</code> heavily, especially with agentic coding tools like Claude Code.</p>
+
+    <h3>Getting Started</h3>
+    <p>Install the plugin and restart your IDE. Open any project that uses git worktrees, then open the <b>Git</b> tool window at the bottom of your IDE. You'll see a new <b>Worktrees</b> tab alongside Log and Console. Click it to see all your worktrees listed with their branch, path, and commit. Double-click any row to switch the current window to that worktree. Use the search field to filter by branch name or path. Click <b>Switch to Main Worktree</b> in the toolbar to instantly jump to whichever worktree has master or main checked out — no need to remember which directory it's in. Right-click any row for more options including opening in a new window or copying the path.</p>
+
+    <h3>Features</h3>
+    <ul>
+        <li><b>Switch to main/master</b> — One click to jump to whichever worktree has your primary branch checked out</li>
+        <li><b>Search worktrees</b> — Real-time filtering by branch name or path</li>
+        <li><b>Integrated in Git tool window</b> — Lives alongside Log, Console, etc.</li>
+        <li><b>Double-click to switch</b> — Switches the current window to the selected worktree</li>
+        <li><b>Open in new window</b> — Right-click option to open in a separate IDE window</li>
+        <li><b>Current worktree highlighting</b> — Your current worktree is bolded in the table</li>
+    </ul>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
