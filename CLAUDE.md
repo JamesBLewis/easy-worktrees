@@ -106,7 +106,7 @@ Key resource: `src/main/resources/META-INF/plugin.xml` — plugin descriptor.
 ### UI Guidelines
 - Follow IntelliJ UI conventions — use `JBTable`, `SearchTextField`, `SimpleToolWindowPanel`.
 - Use `UIManager.getIcon("Table.ascendingSortIcon")` for native sort indicators, not Unicode.
-- Plugin icon in `META-INF/pluginIcon.png` must be exactly 40x40px.
+- Plugin icon must be SVG format: `META-INF/pluginIcon.svg` (40x40 viewBox, 36x36 visible area with 2px padding).
 - Use `AllIcons.*` constants for standard icons.
 
 ### Testing
@@ -128,6 +128,6 @@ Key resource: `src/main/resources/META-INF/plugin.xml` — plugin descriptor.
 
 - `SimpleToolWindowPanel` is in `com.intellij.openapi.ui`, NOT `com.intellij.ui`.
 - `GitCommand.read("worktree")` has a private constructor — use `GeneralCommandLine` instead.
-- `pluginIcon.png` at any size other than 40x40 won't display in the IDE plugin manager.
+- Plugin icon must be SVG (`pluginIcon.svg`), not PNG — PNG icons won't display in the IDE plugin manager.
 - Gradle wrapper must match the IntelliJ Platform Gradle Plugin's minimum requirement (currently 8.13 for plugin 2.11.0).
 - `settings.gradle.kts` needs `pluginManagement { repositories { mavenCentral(); gradlePluginPortal() } }` or the Kotlin plugin won't resolve.

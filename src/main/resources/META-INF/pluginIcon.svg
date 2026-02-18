@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <!-- 2px padding, visible area 36x36 -->
+  <!-- Rounded square background -->
+  <rect x="2" y="2" width="36" height="36" rx="8" fill="#F26522"/>
+  <!-- Git branch/worktree icon - three nodes with connecting lines -->
+  <!-- Main vertical line -->
+  <line x1="15" y1="10" x2="15" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Branch line from middle to right node -->
+  <line x1="15" y1="20" x2="25" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Top node -->
+  <circle cx="15" cy="10" r="3" fill="white"/>
+  <!-- Middle node -->
+  <circle cx="15" cy="20" r="3" fill="white"/>
+  <!-- Bottom node -->
+  <circle cx="15" cy="30" r="3" fill="white"/>
+  <!-- Branch node -->
+  <circle cx="25" cy="14" r="3" fill="white"/>
+</svg>
