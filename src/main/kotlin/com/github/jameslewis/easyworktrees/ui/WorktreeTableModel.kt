@@ -1,6 +1,7 @@
 package com.github.jameslewis.easyworktrees.ui
 
 import com.github.jameslewis.easyworktrees.model.WorktreeInfo
+import javax.swing.SortOrder
 import javax.swing.table.AbstractTableModel
 
 class WorktreeTableModel : AbstractTableModel() {
@@ -11,11 +12,14 @@ class WorktreeTableModel : AbstractTableModel() {
         const val COL_PATH = 1
         const val COL_COMMIT = 2
         const val COL_STATUS = 3
+        val SORTABLE_COLUMNS = setOf(COL_BRANCH, COL_PATH)
     }
 
     private var allWorktrees: List<WorktreeInfo> = emptyList()
     private var filteredWorktrees: List<WorktreeInfo> = emptyList()
     private var filterText: String = ""
+    private var sortColumn: Int? = null
+    private var sortOrder: SortOrder = SortOrder.UNSORTED
 
     override fun getRowCount(): Int = filteredWorktrees.size
     override fun getColumnCount(): Int = COLUMNS.size
@@ -40,16 +44,41 @@ class WorktreeTableModel : AbstractTableModel() {
 
     fun setWorktrees(worktrees: List<WorktreeInfo>) {
         allWorktrees = worktrees
-        applyFilter()
+        applyFilterAndSort()
     }
 
     fun setFilter(text: String) {
         filterText = text.trim()
-        applyFilter()
+        applyFilterAndSort()
     }
 
-    private fun applyFilter() {
-        filteredWorktrees = if (filterText.isEmpty()) {
+    fun getSortColumn(): Int? = sortColumn
+    fun getSortOrder(): SortOrder = sortOrder
+
+    /**
+     * Toggles sorting for the given column.
+     * Cycles: unsorted -> ascending -> descending -> unsorted.
+     * If a different column is clicked, starts at ascending.
+     */
+    fun toggleSort(column: Int) {
+        if (column !in SORTABLE_COLUMNS) return
+
+        if (sortColumn == column) {
+            sortOrder = when (sortOrder) {
+                SortOrder.ASCENDING -> SortOrder.DESCENDING
+                SortOrder.DESCENDING -> SortOrder.UNSORTED
+                else -> SortOrder.ASCENDING
+            }
+            if (sortOrder == SortOrder.UNSORTED) sortColumn = null
+        } else {
+            sortColumn = column
+            sortOrder = SortOrder.ASCENDING
+        }
+        applyFilterAndSort()
+    }
+
+    private fun applyFilterAndSort() {
+        var result = if (filterText.isEmpty()) {
             allWorktrees
         } else {
             val lower = filterText.lowercase()
@@ -59,6 +88,22 @@ class WorktreeTableModel : AbstractTableModel() {
                     wt.directoryName.lowercase().contains(lower)
             }
         }
+
+        val col = sortColumn
+        if (col != null && sortOrder != SortOrder.UNSORTED) {
+            val selector: (WorktreeInfo) -> String = when (col) {
+                COL_BRANCH -> { wt -> wt.displayBranch.lowercase() }
+                COL_PATH -> { wt -> wt.directoryName.lowercase() }
+                else -> { _ -> "" }
+            }
+            result = if (sortOrder == SortOrder.ASCENDING) {
+                result.sortedBy(selector)
+            } else {
+                result.sortedByDescending(selector)
+            }
+        }
+
+        filteredWorktrees = result
         fireTableDataChanged()
     }
 

@@ -22,6 +22,20 @@
     </ul>
     ]]></description>
 
+    <change-notes><![CDATA[
+    <h3>1.0.0</h3>
+    <ul>
+        <li>Initial release</li>
+        <li>Worktrees tab integrated into the Git tool window</li>
+        <li>One-click switch to main/master/trunk worktree</li>
+        <li>Real-time search filtering by branch name or path</li>
+        <li>Double-click to switch current window to a worktree</li>
+        <li>Right-click context menu: Switch to Worktree, Open in New Window, Copy Path</li>
+        <li>Sortable Branch and Path columns (ascending/descending)</li>
+        <li>Current worktree highlighted in bold</li>
+    </ul>
+    ]]></change-notes>
+
     <depends>com.intellij.modules.platform</depends>
     <depends>Git4Idea</depends>
 

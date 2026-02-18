@@ -96,6 +96,20 @@ class WorktreePanel(private val project: Project) : SimpleToolWindowPanel(true, 
             table.columnModel.getColumn(i).cellRenderer = renderer
         }
 
+        // Sort on column header click
+        table.tableHeader.addMouseListener(object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent) {
+                val col = table.columnAtPoint(e.point)
+                if (col >= 0) {
+                    tableModel.toggleSort(col)
+                    updateHeaderSortIndicators()
+                    highlightCurrentWorktree()
+                }
+            }
+        })
+        // Set cursor to hand on sortable column headers
+        table.tableHeader.defaultRenderer = SortableHeaderRenderer(table.tableHeader.defaultRenderer, tableModel)
+
         table.addMouseListener(object : MouseAdapter() {
             override fun mouseClicked(e: MouseEvent) {
                 if (e.clickCount == 2) {
@@ -214,6 +228,10 @@ class WorktreePanel(private val project: Project) : SimpleToolWindowPanel(true, 
                 highlightCurrentWorktree()
             }
         }
+    }
+
+    private fun updateHeaderSortIndicators() {
+        table.tableHeader.repaint()
     }
 
     private fun highlightCurrentWorktree() {
