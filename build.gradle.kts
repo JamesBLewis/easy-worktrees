@@ -3,7 +3,7 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.9.25"
-    id("org.jetbrains.intellij.platform") version "2.3.0"
+    id("org.jetbrains.intellij.platform") version "2.11.0"
 }
 
 group = providers.gradleProperty("pluginGroup").get()
@@ -40,6 +40,11 @@ intellijPlatform {
             untilBuild = provider { null }
         }
     }
+    signing {
+        certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
+        privateKey = providers.environmentVariable("PRIVATE_KEY")
+        password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
+    }
     publishing {
         token = providers.environmentVariable("JETBRAINS_TOKEN")
     }
@@ -47,6 +52,6 @@ intellijPlatform {
 
 tasks {
     wrapper {
-        gradleVersion = "8.12"
+        gradleVersion = "8.13"
     }
 }
