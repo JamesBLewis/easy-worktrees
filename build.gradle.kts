@@ -40,6 +40,9 @@ intellijPlatform {
             untilBuild = provider { null }
         }
     }
+    publishing {
+        token = providers.environmentVariable("JETBRAINS_TOKEN")
+    }
 }
 
 tasks {
