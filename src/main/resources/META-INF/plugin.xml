@@ -23,6 +23,13 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    <h3>1.1.0</h3>
+    <ul>
+        <li>Sortable Branch and Path columns (click header to toggle ascending/descending)</li>
+        <li>Native IntelliJ sort indicators in column headers</li>
+        <li>Fixed plugin icon display in IDE plugin manager</li>
+        <li>Added marketplace badges and improved plugin description</li>
+    </ul>
     <h3>1.0.0</h3>
     <ul>
         <li>Initial release</li>
@@ -31,7 +38,6 @@
         <li>Real-time search filtering by branch name or path</li>
         <li>Double-click to switch current window to a worktree</li>
         <li>Right-click context menu: Switch to Worktree, Open in New Window, Copy Path</li>
-        <li>Sortable Branch and Path columns (ascending/descending)</li>
         <li>Current worktree highlighted in bold</li>
     </ul>
     ]]></change-notes>
