@@ -9,7 +9,7 @@
 
 An IntelliJ IDEA plugin for managing Git worktrees. Adds a **Worktrees** tab directly inside the existing Git tool window — no extra sidebar icons, no clutter.
 
-Built for developers who use `git worktree` heavily (especially with tools like [1code](https://github.com/nicholasgasior/1code) for running multiple Claude Code sessions).
+Built for developers who use `git worktree` heavily (especially with tools like [1code](https://github.com/21st-dev/1code) for running multiple Claude Code sessions).
 
 ## Features
 
