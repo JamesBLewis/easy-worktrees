@@ -3,6 +3,7 @@ package com.github.jameslewis.easyworktrees.services
 import com.github.jameslewis.easyworktrees.model.WorktreeInfo
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.CapturingProcessHandler
+import com.intellij.execution.wsl.WslPath
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
@@ -42,7 +43,8 @@ class WorktreeService(private val project: Project) {
                 return emptyList()
             }
 
-            parsePorcelainOutput(output.stdoutLines)
+            val worktrees = parsePorcelainOutput(output.stdoutLines)
+            convertWslPaths(worktrees)
         } catch (e: Exception) {
             LOG.warn("Failed to run git worktree list", e)
             emptyList()
@@ -55,6 +57,30 @@ class WorktreeService(private val project: Project) {
     fun isCurrentWorktree(worktree: WorktreeInfo): Boolean {
         val projectPath = project.basePath ?: return false
         return File(projectPath).canonicalPath == File(worktree.path).canonicalPath
+    }
+
+    /**
+     * On WSL, git returns Linux paths (e.g. /home/user/project) but IntelliJ
+     * needs Windows UNC paths (e.g. \\wsl.localhost\Ubuntu\home\user\project).
+     * Detect WSL from the project path and convert accordingly.
+     */
+    private fun convertWslPaths(worktrees: List<WorktreeInfo>): List<WorktreeInfo> {
+        val basePath = project.basePath ?: return worktrees
+        val wslPath = try {
+            WslPath.parseWindowsUncPath(basePath)
+        } catch (e: Exception) {
+            return worktrees
+        } ?: return worktrees
+
+        val distribution = wslPath.distribution
+        return worktrees.map { wt ->
+            val windowsPath = try {
+                distribution.getWindowsPath(wt.path)
+            } catch (e: Exception) {
+                null
+            }
+            if (windowsPath != null) wt.copy(path = windowsPath) else wt
+        }
     }
 
     internal fun parsePorcelainOutput(lines: List<String>): List<WorktreeInfo> {
