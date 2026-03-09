@@ -181,8 +181,10 @@ class WorktreePanel(private val project: Project) : SimpleToolWindowPanel(true, 
             return
         }
 
-        // Open in the current window (replaces current project)
-        ProjectUtil.openOrImport(Path.of(worktree.path), project, false)
+        // Open in the current window (must not run on EDT — project close triggers blocking ops)
+        ApplicationManager.getApplication().executeOnPooledThread {
+            ProjectUtil.openOrImport(Path.of(worktree.path), project, false)
+        }
     }
 
     /**
@@ -202,7 +204,9 @@ class WorktreePanel(private val project: Project) : SimpleToolWindowPanel(true, 
             return
         }
 
-        ProjectUtil.openOrImport(Path.of(worktree.path), null, true)
+        ApplicationManager.getApplication().executeOnPooledThread {
+            ProjectUtil.openOrImport(Path.of(worktree.path), null, true)
+        }
     }
 
     private fun findOpenProject(worktree: WorktreeInfo): Project? {

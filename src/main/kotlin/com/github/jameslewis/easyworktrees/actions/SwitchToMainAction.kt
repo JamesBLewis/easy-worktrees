@@ -69,8 +69,10 @@ class SwitchToMainAction : AnAction() {
                     return@invokeLater
                 }
 
-                // Switch current window to the main worktree
-                ProjectUtil.openOrImport(Path.of(mainWorktree.path), project, false)
+                // Switch current window to the main worktree (must not run on EDT)
+                ApplicationManager.getApplication().executeOnPooledThread {
+                    ProjectUtil.openOrImport(Path.of(mainWorktree.path), project, false)
+                }
             }
         }
     }
