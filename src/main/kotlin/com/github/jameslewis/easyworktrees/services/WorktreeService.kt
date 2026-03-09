@@ -51,8 +51,13 @@ class WorktreeService(private val project: Project) {
         }
     }
 
-    fun findMainBranchWorktree(): WorktreeInfo? =
-        listWorktrees().firstOrNull { it.isOnMainBranch }
+    fun findMainBranchWorktree(): WorktreeInfo? {
+        val worktrees = listWorktrees()
+        // Prefer a worktree on main/master/trunk, fall back to the git main worktree
+        // (the original clone directory) for repos with non-standard default branches
+        return worktrees.firstOrNull { it.isOnMainBranch }
+            ?: worktrees.firstOrNull { it.isMainWorktree }
+    }
 
     fun isCurrentWorktree(worktree: WorktreeInfo): Boolean {
         val projectPath = project.basePath ?: return false

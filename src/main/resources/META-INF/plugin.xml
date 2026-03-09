@@ -23,6 +23,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    <h3>1.2.1</h3>
+    <ul>
+        <li>Switch to Main now falls back to the git main worktree when no main/master/trunk branch is found</li>
+    </ul>
     <h3>1.2.0</h3>
     <ul>
         <li>Added WSL (Windows Subsystem for Linux) support — worktree paths are now correctly converted to Windows UNC paths</li>
