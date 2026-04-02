@@ -7,7 +7,7 @@
 [![JetBrains Marketplace](https://img.shields.io/jetbrains/plugin/v/30206-easy-worktrees.svg?label=JetBrains%20Marketplace)](https://plugins.jetbrains.com/plugin/30206-easy-worktrees)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/30206-easy-worktrees.svg)](https://plugins.jetbrains.com/plugin/30206-easy-worktrees)
 
-An IntelliJ IDEA plugin for managing Git worktrees. Adds a **Worktrees** tab directly inside the existing Git tool window — no extra sidebar icons, no clutter.
+An IntelliJ IDEA plugin for managing Git worktrees. Adds a **Worktrees** tab directly inside the existing Git tool window.
 
 Built for developers who use `git worktree` heavily (especially with tools like [1code](https://github.com/21st-dev/1code) for running multiple Claude Code sessions).
 
