@@ -62,6 +62,11 @@ class WorktreePanel(private val project: Project) : SimpleToolWindowPanel(true, 
             override fun removeUpdate(e: DocumentEvent) = onFilterChanged()
             override fun changedUpdate(e: DocumentEvent) = onFilterChanged()
         })
+        searchField.textEditor.addFocusListener(object : java.awt.event.FocusAdapter() {
+            override fun focusGained(e: java.awt.event.FocusEvent?) {
+                refreshWorktrees()
+            }
+        })
     }
 
     private fun onFilterChanged() {
